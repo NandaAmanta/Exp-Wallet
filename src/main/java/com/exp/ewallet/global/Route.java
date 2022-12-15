@@ -14,22 +14,22 @@ public class Route {
     /**
      * Base API routes
      */
-    public static String API_V1 = "/api/v1";
+    public static final String API_V1 = "/api/v1";
 
     /**
      * User routes
      */
-    public static String USER = "/users";
+    public static final String USER = "/users";
 
     /**
      * Balance routes
      */
-    public static String BALANCE = "/balances";
-    public static String TOPUP = "/topup";
+    public static final String BALANCE = "/balances";
+    public static final String TOPUP = "/topup";
 
     /**
      * Id parameter request
      */
-    public static String ID = "/{id}";
+    public static final String ID = "/{id}";
 
 }

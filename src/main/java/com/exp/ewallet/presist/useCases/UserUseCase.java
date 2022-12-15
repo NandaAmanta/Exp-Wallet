@@ -46,8 +46,8 @@ public class UserUseCase implements UserDetailsService {
      * @param id
      * @return UserDetail
      */
-    public UserDetail getUserDetailById(String id) {
-        User user = userRepository.findById(Long.parseLong(id)).orElseThrow();
+    public UserDetail getUserDetailById(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
         UserDetail userDetail = UserDetail.fromEntity(user);
         return userDetail;
     }
