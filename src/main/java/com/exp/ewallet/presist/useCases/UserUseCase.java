@@ -18,6 +18,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class UserUseCase implements UserDetailsService {
 
+    /**
+     * Dependency inject UserRepository
+     */
     @Autowired
     private UserRepository userRepository;
 
@@ -48,7 +51,5 @@ public class UserUseCase implements UserDetailsService {
         UserDetail userDetail = UserDetail.fromEntity(user);
         return userDetail;
     }
-    
-    
 
 }
