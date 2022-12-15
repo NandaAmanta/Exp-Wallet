@@ -16,6 +16,13 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ResponseSuccess<T> extends Response {
 
+    /**
+     * Set default value ok to be true
+     */
     private boolean ok = true;
+
+    /**
+     * Data from server
+     */
     private T data;
 }

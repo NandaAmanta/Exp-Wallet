@@ -13,7 +13,18 @@ import lombok.Data;
 @Data
 public class Response {
 
+    /**
+     * Status success (true) or error (false)
+     */
     private boolean ok;
+
+    /**
+     * HTTP Status Code
+     */
     private String status;
+
+    /**
+     * Server Message
+     */
     private String message;
 }

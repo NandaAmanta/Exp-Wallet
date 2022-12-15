@@ -25,11 +25,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(Route.API_V1 + Route.USER)
 public class UserController {
 
+    /**
+     * Inject Dependency UserUseCase
+     */
     @Autowired
     private UserUseCase userUseCase;
 
+    /**
+     * Response Success Object
+     */
     private final ResponseSuccess response = new ResponseSuccess();
 
+    /**
+     * Get User Detail by Id
+     * @param id
+     * @return ResponseEntity
+     */
     @GetMapping(Route.ID)
     public ResponseEntity<Response> getUserDetail(@PathVariable Long id) {
         UserDetail userDetail = userUseCase.getUserDetailById(id);

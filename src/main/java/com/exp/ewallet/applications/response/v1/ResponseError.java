@@ -17,7 +17,18 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ResponseError extends Response {
 
+    /**
+     * Set default value ok to be false
+     */
     private boolean ok = false;
+
+    /**
+     * custom error code
+     */
     private String errorCode;
+
+    /**
+     * Errors Object/message
+     */
     private Object errors = new ArrayList<>();
 }
