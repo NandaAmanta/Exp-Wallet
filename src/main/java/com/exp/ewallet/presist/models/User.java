@@ -55,6 +55,12 @@ public class User implements Serializable {
      */
     @Column(nullable = false)
     private String password;
+    
+    /**
+     * User password
+     */
+    @Column(nullable = true)
+    private String pin;
 
     /**
      * User phone number

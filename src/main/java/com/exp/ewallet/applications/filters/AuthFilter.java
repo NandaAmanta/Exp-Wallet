@@ -21,7 +21,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  *
- * @author ASUS ROG
+ * @author I Putu Nanda Amanta
  */
 @Component
 public class AuthFilter extends OncePerRequestFilter {

@@ -22,6 +22,13 @@ public class Route {
     public static final String USER = "/users";
 
     /**
+     * Auth routes
+     */
+    public static final String AUTH = "/auth";
+    public static final String LOGIN = "/login";
+    public static final String SIGNUP = "/signup";
+
+    /**
      * Balance routes
      */
     public static final String BALANCE = "/balances";
