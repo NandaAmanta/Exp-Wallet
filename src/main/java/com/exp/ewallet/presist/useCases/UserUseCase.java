@@ -5,7 +5,8 @@
 package com.exp.ewallet.presist.useCases;
 
 import com.exp.ewallet.applications.response.v1.user.UserDetail;
-import com.exp.ewallet.presist.models.User;
+import com.exp.ewallet.presist.models.user.User;
+import com.exp.ewallet.presist.models.user.enums.UserStatus;
 import com.exp.ewallet.presist.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +39,11 @@ public class UserUseCase implements UserDetailsService {
         User user = userRepository.findByUserName(username).orElseThrow();
         UserDetails userDetails = org.springframework.security.core.userdetails.User
                 .withUsername(user.getUserName())
+                .disabled(user.getStatus() == UserStatus.NOT_VERIFIED)
+                .accountLocked(user.getStatus() == UserStatus.BANNED)
+                .roles("USER")
                 .password(user.getPassword()).build();
+        
         return userDetails;
     }
 

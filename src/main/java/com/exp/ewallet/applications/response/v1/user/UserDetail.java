@@ -4,7 +4,7 @@
  */
 package com.exp.ewallet.applications.response.v1.user;
 
-import com.exp.ewallet.presist.models.User;
+import com.exp.ewallet.presist.models.user.User;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;

@@ -25,6 +25,7 @@ public class Route {
      * Auth routes
      */
     public static final String AUTH = "/auth";
+    public static final String SIGNUP_VERIFICATION = "/signup/verification";
     public static final String LOGIN = "/login";
     public static final String SIGNUP = "/signup";
 

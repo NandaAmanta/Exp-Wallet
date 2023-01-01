@@ -6,12 +6,14 @@ package com.exp.ewallet.exceptions;
 
 import com.exp.ewallet.applications.response.v1.Response;
 import com.exp.ewallet.applications.response.v1.ResponseError;
+import com.exp.ewallet.exceptions.custom.ValidationNumberException;
 import io.jsonwebtoken.SignatureException;
 import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.persistence.NoResultException;
+import javax.security.auth.login.AccountException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -54,6 +56,22 @@ public class HandlerException extends ResponseEntityExceptionHandler {
         ResponseError response = new ResponseError();
         response.setMessage(exception.getMessage() == null ? "Data not found" : exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(ValidationNumberException.class)
+    public ResponseEntity<Response> handleValidationNumberException(ValidationNumberException exception) {
+        ResponseError response = new ResponseError();
+        response.setMessage(exception.getMessage());
+        response.setErrors(new ArrayList<>());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(com.exp.ewallet.exceptions.custom.AccountException.class)
+    public ResponseEntity<Response> handleAccountException(Exception exception) {
+        ResponseError response = new ResponseError();
+        response.setMessage(exception.getMessage());
+        response.setErrors(new ArrayList<>());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

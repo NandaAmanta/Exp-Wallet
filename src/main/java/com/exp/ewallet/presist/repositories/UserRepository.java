@@ -4,7 +4,7 @@
  */
 package com.exp.ewallet.presist.repositories;
 
-import com.exp.ewallet.presist.models.User;
+import com.exp.ewallet.presist.models.user.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

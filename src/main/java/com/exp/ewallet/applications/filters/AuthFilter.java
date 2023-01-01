@@ -36,20 +36,20 @@ public class AuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String username = null;
         String token = jwtUtil.resolveToken(request);
-        if (token == null) {
+        if (token != null) {
             username = jwtUtil.getUserNameFromToken(token);
         }
 
         if (username != null) {
             UserDetails userDetails = userUseCase.loadUserByUsername(username);
-            if (jwtUtil.isTokenValid(token, userDetails)) {
+            if (jwtUtil.isTokenValid(token, userDetails) && userDetails.isEnabled() && userDetails.isAccountNonLocked()) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                         = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-        
+
         filterChain.doFilter(request, response);
     }
 

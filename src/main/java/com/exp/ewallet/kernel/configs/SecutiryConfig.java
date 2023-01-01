@@ -42,7 +42,7 @@ public class SecutiryConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/signup", "/api/v1/auth/login").permitAll()
+                .antMatchers("/api/v1/auth/signup", "/api/v1/auth/login", "/api/v1/auth/signup/verification/*").permitAll()
                 .anyRequest().authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

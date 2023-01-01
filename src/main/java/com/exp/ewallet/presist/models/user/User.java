@@ -2,15 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.exp.ewallet.presist.models;
+package com.exp.ewallet.presist.models.user;
 
+import com.exp.ewallet.presist.models.user.enums.UserStatus;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +60,7 @@ public class User implements Serializable {
      */
     @Column(nullable = false)
     private String password;
-    
+
     /**
      * User password
      */
@@ -73,6 +78,9 @@ public class User implements Serializable {
      */
     @Column(nullable = false, name = "phone_country_code")
     private String phoneCountryCode;
+
+    @Enumerated(value = EnumType.STRING)
+    private UserStatus status = UserStatus.NOT_VERIFIED;
 
     /**
      * data creation date time
