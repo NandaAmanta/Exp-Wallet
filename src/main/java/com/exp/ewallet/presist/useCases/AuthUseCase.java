@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 /**
  *
@@ -54,15 +55,15 @@ public class AuthUseCase {
     public TokenDetail login(LoginRequest request) {
         try {
             var userdetail = userUseCase.loadUserByUsername(request.getUsername());
-            
-            if(!userdetail.isEnabled()){
+
+            if (!userdetail.isEnabled()) {
                 throw new AccountException("Account is still Not Verified");
             }
-            
-            if(!userdetail.isAccountNonLocked()){
+
+            if (!userdetail.isAccountNonLocked()) {
                 throw new AccountException("Account is Banned");
             }
-            
+
             boolean isMatchPassword = passwordEncoder.getEncoder()
                     .matches(request.getPassword(), userdetail.getPassword());
             if (!isMatchPassword) {
@@ -82,6 +83,23 @@ public class AuthUseCase {
      * @return
      */
     public UserDetail signUp(SignupRequest request) {
+
+        boolean isThereUserWithSameUsername = !userRepository
+                .findAllByUserName(request.getUsername())
+                .isEmpty();
+
+        if (isThereUserWithSameUsername) {
+            throw new AccountException("This username has been used by other user, try another username.");
+        }
+
+        boolean isThereUserWithSameEmail = !userRepository
+                .findAllByEmail(request.getEmail())
+                .isEmpty();
+
+        if (isThereUserWithSameEmail) {
+            throw new AccountException("This email has been used by other user, try another username.");
+        }
+
         User newUser = request.toEntity();
         newUser.setPassword(passwordEncoder.getEncoder().encode(newUser.getPassword()));
         newUser = userRepository.save(newUser);
