@@ -36,6 +36,11 @@ public class Route {
     public static final String TOPUP = "/topup";
 
     /**
+     * Admin Routes
+     */
+    public static final String ADMIN = "/admin";
+    
+    /**
      * Id parameter request
      */
     public static final String ID = "/{id}";

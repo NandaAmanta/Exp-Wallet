@@ -5,6 +5,7 @@
 package com.exp.ewallet.kernel.configs;
 
 import com.exp.ewallet.applications.filters.AuthFilter;
+import com.exp.ewallet.presist.models.user.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,7 @@ public class SecutiryConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/signup", "/api/v1/auth/login", "/api/v1/auth/signup/verification/*").permitAll()
+                .antMatchers("/api/v1/admin/**").hasAnyRole(Role.ADMIN.toString())
                 .anyRequest().authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

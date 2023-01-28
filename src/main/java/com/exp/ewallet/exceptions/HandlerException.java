@@ -9,12 +9,15 @@ import com.exp.ewallet.applications.response.v1.ResponseError;
 import com.exp.ewallet.exceptions.custom.ValidationNumberException;
 import io.jsonwebtoken.SignatureException;
 import java.nio.file.AccessDeniedException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.persistence.NoResultException;
 import javax.security.auth.login.AccountException;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +63,14 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(ValidationNumberException.class)
     public ResponseEntity<Response> handleValidationNumberException(ValidationNumberException exception) {
+        ResponseError response = new ResponseError();
+        response.setMessage(exception.getMessage());
+        response.setErrors(new ArrayList<>());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<Response> handleConstraintViolationException(SQLIntegrityConstraintViolationException exception) {
         ResponseError response = new ResponseError();
         response.setMessage(exception.getMessage());
         response.setErrors(new ArrayList<>());

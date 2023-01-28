@@ -4,6 +4,7 @@
  */
 package com.exp.ewallet.presist.models.user;
 
+import com.exp.ewallet.presist.models.user.enums.Role;
 import com.exp.ewallet.presist.models.user.enums.UserStatus;
 import java.io.Serializable;
 import java.util.Date;
@@ -81,6 +82,12 @@ public class User implements Serializable {
 
     @Enumerated(value = EnumType.STRING)
     private UserStatus status = UserStatus.NOT_VERIFIED;
+    
+    /**
+     * User role
+     */
+    @Enumerated(value = EnumType.STRING)
+    private Role role = Role.USER;
 
     /**
      * data creation date time

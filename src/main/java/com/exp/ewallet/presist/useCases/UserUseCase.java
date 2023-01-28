@@ -41,9 +41,9 @@ public class UserUseCase implements UserDetailsService {
                 .withUsername(user.getUserName())
                 .disabled(user.getStatus() == UserStatus.NOT_VERIFIED)
                 .accountLocked(user.getStatus() == UserStatus.BANNED)
-                .roles("USER")
+                .roles(user.getRole().toString())
                 .password(user.getPassword()).build();
-        
+
         return userDetails;
     }
 
